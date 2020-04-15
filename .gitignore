@@ -1,7 +1,5 @@
 .DS_store
 __pycache__
+subject_old
 
 machine.log
-
-# Subject
-day02
