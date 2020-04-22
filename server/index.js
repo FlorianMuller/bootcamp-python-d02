@@ -7,7 +7,8 @@ import favicon from "serve-favicon";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
-import router from "./router";
+import passport from "./passport-config";
+import apiRouter from "./router";
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.set("root", "/");
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "ejs");
 
+// Middleware
+
 app.use(favicon(path.join(__dirname, "views", "favicon.ico")));
 app.use("/public", express.static("public"));
 app.use(morgan("dev"));
@@ -27,6 +30,7 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
 /* Webpack Hot Reload */
 const webpack = require("webpack");
@@ -48,10 +52,14 @@ app.use(hotMiddleware);
 /* eslint-enable */
 /* ------------------ */
 
-app.use("/api", router);
+// Routing
+
+app.use("/api", apiRouter);
 app.get("*", (req, res) => {
   res.render("index");
 });
+
+// Socket
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -66,6 +74,8 @@ io.on("connection", (socket) => {
     socket.leave(movieId);
   });
 });
+
+// Listening
 
 http.listen(8080, () => {
   console.log("Server running on 8080");

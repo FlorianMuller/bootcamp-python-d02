@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 
+import passport from "passport";
 import movieController from "./Controllers/movie";
 import signUpController from "./Controllers/signUp";
 import SignInControllers from "./Controllers/signIn";
@@ -12,6 +13,28 @@ const router = express.Router();
 /* User */
 router.post("/inscription", signUpController.signUp);
 router.post("/user/login", SignInControllers);
+
+// Google omniauth
+router.get(
+  "/user/google",
+  passport.authenticate("google", {
+    scope: ["openid", "email", "profile"],
+    session: false
+  })
+);
+
+router.get(
+  "/user/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/error",
+    session: false
+  }),
+  (req, res) => {
+    console.log("user:", req.user);
+    // todo: set cookie with acces token here
+    res.redirect("/");
+  }
+);
 
 router.get("/check-auth", checkAuth, (req, res) => {
   res.status(200).json({ validToken: true });

@@ -28,7 +28,7 @@ const createUser = async (user, insertPT) => {
     } else {
       hashedPT = user.picture;
     }
-    const hashedPW = bcrypt.hashSync(user.password, 10);
+    const hashedPW = await bcrypt.hash(user.password, 10);
     await UserModel.create({
       _id: user._id,
       email: user.email,

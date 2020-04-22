@@ -106,6 +106,8 @@
     "mongoose": "^5.7.12",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
     "prettier": "^1.19.1",
     "qs": "^6.9.1",
     "react": "^16.12.0",

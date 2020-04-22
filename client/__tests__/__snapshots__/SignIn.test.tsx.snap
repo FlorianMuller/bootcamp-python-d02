@@ -720,6 +720,11 @@ exports[`SignIn should render <SignIn> in english 1`] = `
                             </h5>
                           </ForwardRef(Typography)>
                         </WithStyles(ForwardRef(Typography))>
+                        <a
+                          href="/api/user/google"
+                        >
+                          Sign In with Google
+                        </a>
                         <form
                           className="makeStyles-form-8"
                           onSubmit={[Function]}
@@ -3062,6 +3067,11 @@ exports[`SignIn should render <SignIn> in french 1`] = `
                             </h5>
                           </ForwardRef(Typography)>
                         </WithStyles(ForwardRef(Typography))>
+                        <a
+                          href="/api/user/google"
+                        >
+                          Sign In with Google
+                        </a>
                         <form
                           className="makeStyles-form-8"
                           onSubmit={[Function]}
